@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
-using DatingApp.API.Values;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
-
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class ValuesController : ControllerBase { 
-
+public class ValuesController : ControllerBase 
+{ 
     private readonly DataContext _context;
     public ValuesController(DataContext context)
     {
@@ -27,6 +24,8 @@ public class ValuesController : ControllerBase {
         return Ok(values);
     }
 
+    //Cualquiera puede entrar, no hace falta token
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetValues(int id)
     {
