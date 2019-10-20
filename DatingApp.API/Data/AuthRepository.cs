@@ -20,6 +20,8 @@ namespace DatingApp.API.Data
             if (user!=null){
                 
                 var isValid = VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt);
+
+                if (! isValid) return null;
             }
 
             return user;
